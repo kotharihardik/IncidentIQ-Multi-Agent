@@ -1,5 +1,6 @@
 global:
   scrape_interval: 15s
+<<<<<<< HEAD
 
 scrape_configs:
   - job_name: incidentiq-api
@@ -13,3 +14,18 @@ scrape_configs:
   - job_name: elasticsearch
     static_configs:
       - targets: ["elasticsearch:9200"]
+=======
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'fastapi'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets:
+          - host.docker.internal:8000
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets:
+          - localhost:9090
+>>>>>>> d8fc6125ea1b55e2ebb060d35dc138d94da32ffd
