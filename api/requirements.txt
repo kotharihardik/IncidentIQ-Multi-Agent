@@ -1,36 +1,12 @@
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
 pydantic==2.7.1
-pydantic-settings==2.2.1
-
-# Kafka
-confluent-kafka==2.4.0
-
-# Elasticsearch
-elasticsearch==8.13.0
-
-# Qdrant
-qdrant-client==1.9.1
-
-# Redis
-redis==5.0.4
-
-# PostgreSQL
-asyncpg==0.29.0
-sqlalchemy[asyncio]==2.0.30
-
-# LLM + Agents
 openai==1.30.1
-langgraph==0.1.1
+langgraph==0.1.6
 langchain-core==0.2.1
-langchain-openai==0.1.8
-
-# Embeddings + Reranking
-sentence-transformers==3.0.1
-
-# Monitoring
-prometheus-fastapi-instrumentator==6.1.0
-
-# Utilities
+sentence-transformers==2.7.0
+qdrant-client==1.9.1
+elasticsearch==8.13.1
+kafka-python==2.0.2
+redis==5.0.4
 python-dotenv==1.0.1
-httpx==0.27.0

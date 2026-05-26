@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: incidentiq-api
+  labels:
+    app: incidentiq-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: incidentiq-api
+  template:
+    metadata:
+      labels:
+        app: incidentiq-api
+    spec:
+      containers:
+        - name: api
+          image: incidentiq-api:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: incidentiq-config
+            - secretRef:
+                name: incidentiq-secrets
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: incidentiq-api
+spec:
+  selector:
+    app: incidentiq-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
